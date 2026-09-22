@@ -1,0 +1,10 @@
+services:
+  archguard:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - ARCHGUARD_OLLAMA_URL=http://host.docker.internal:11434
+      - ARCHGUARD_OLLAMA_MODEL=llama3.2
+    volumes:
+      - ./reports:/app/reports

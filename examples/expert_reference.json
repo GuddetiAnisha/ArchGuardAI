@@ -1,0 +1,14 @@
+{
+  "scenario_id": "equipment-health-v1",
+  "labels": {
+    "SYN-AUTH-001": "COMPLIANT",
+    "SYN-AUTHZ-002": "COMPLIANT",
+    "SYN-DATA-003": "COMPLIANT",
+    "SYN-DATA-004": "COMPLIANT",
+    "SYN-SECRET-005": "COMPLIANT",
+    "SYN-LOG-006": "COMPLIANT",
+    "SYN-RES-007": "COMPLIANT",
+    "SYN-PRIV-008": "NOT_ENOUGH_INFORMATION"
+  },
+  "review_minutes": 18
+}

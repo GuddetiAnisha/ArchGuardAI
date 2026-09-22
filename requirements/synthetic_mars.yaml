@@ -1,0 +1,69 @@
+catalogue:
+  name: Synthetic Mandatory Architecture Requirements
+  version: "1.0"
+  disclaimer: Public examples for research; not Ericsson MAR content.
+requirements:
+  - id: SYN-AUTH-001
+    title: Strong service authentication
+    category: Identity and Access
+    statement: All externally accessible APIs and service-to-service calls must use authenticated identities.
+    risk: Unauthenticated endpoints may allow unauthorized access and service impersonation.
+    recommendation: Enforce OAuth 2.0 or OIDC for user-facing APIs and workload identity or mutual TLS between services.
+    evidence_any: [oauth, oidc, jwt, mutual tls, mtls, workload identity, service identity]
+    contradiction_any: [no authentication, unauthenticated api, authentication disabled, anonymous access]
+  - id: SYN-AUTHZ-002
+    title: Least-privilege authorization
+    category: Identity and Access
+    statement: Access decisions must enforce least privilege using explicit roles or policies.
+    risk: Excessive permissions increase lateral-movement and data-exposure impact.
+    recommendation: Define RBAC or ABAC policies, deny by default, and review permissions regularly.
+    evidence_any: [rbac, abac, least privilege, deny by default, authorization policy]
+    contradiction_any: [all users are admin, shared admin, allow all permissions, authorization disabled]
+  - id: SYN-DATA-003
+    title: Encryption in transit
+    category: Data Protection
+    statement: Sensitive data must be encrypted in transit across trust boundaries.
+    risk: Unencrypted transport can expose credentials, personal data, and system information.
+    recommendation: Require TLS 1.2 or later and manage certificates through an approved lifecycle.
+    evidence_any: [tls 1.2, tls 1.3, https, mutual tls, mtls, encrypted in transit]
+    contradiction_any: [plaintext http, unencrypted transport, tls disabled, cleartext]
+  - id: SYN-DATA-004
+    title: Encryption at rest
+    category: Data Protection
+    statement: Sensitive persistent data and backups must be encrypted at rest.
+    risk: Storage compromise may expose sensitive records and secrets.
+    recommendation: Enable database, volume, object-storage, and backup encryption with managed keys.
+    evidence_any: [encrypted at rest, aes-256, volume encryption, database encryption, backup encryption]
+    contradiction_any: [unencrypted database, plaintext storage, encryption at rest disabled]
+  - id: SYN-SECRET-005
+    title: Centralized secret management
+    category: Secrets
+    statement: Credentials and cryptographic secrets must not be embedded in code or static configuration.
+    risk: Hard-coded secrets can leak through repositories, images, logs, and build artifacts.
+    recommendation: Use a secret manager, short-lived credentials, rotation, and access auditing.
+    evidence_any: [secret manager, vault, key vault, secrets manager, short-lived credential, secret rotation]
+    contradiction_any: [hard-coded password, hardcoded password, secret in source code, credentials in config file]
+  - id: SYN-LOG-006
+    title: Security audit logging
+    category: Observability
+    statement: Authentication, authorization, administrative, and sensitive-data events must be auditable.
+    risk: Missing audit evidence delays detection, incident response, and accountability.
+    recommendation: Create tamper-resistant structured audit logs with identity, action, outcome, and timestamp.
+    evidence_any: [audit log, security logging, authentication events, authorization events, tamper-resistant log]
+    contradiction_any: [logging disabled, no audit logs, authentication events are not logged]
+  - id: SYN-RES-007
+    title: Independent scaling and failure isolation
+    category: Resilience
+    statement: Critical components must define scaling boundaries and isolate failures.
+    risk: Shared bottlenecks and cascading failures reduce availability during load or dependency failure.
+    recommendation: Define independent scaling, timeouts, bounded retries, circuit breakers, and bulkheads.
+    evidence_any: [horizontal scaling, autoscaling, timeout, circuit breaker, bulkhead, bounded retry]
+    contradiction_any: [unbounded retry, no timeout, single process for all services, cannot scale independently]
+  - id: SYN-PRIV-008
+    title: Data minimization and retention
+    category: Privacy
+    statement: Personal or sensitive data collection and retention must be limited to the documented purpose.
+    risk: Excessive collection or indefinite retention increases privacy, legal, and breach impact.
+    recommendation: Document purpose, minimize fields, set retention periods, and support deletion.
+    evidence_any: [data minimization, retention period, purpose limitation, deletion policy, privacy by design]
+    contradiction_any: [retain indefinitely, collect all user data, no deletion, unlimited retention]
