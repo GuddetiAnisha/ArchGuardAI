@@ -113,3 +113,47 @@ ArchGuardAI/
 ## License
 
 MIT. See `LICENSE`.
+
+
+## Neuro-symbolic AI research mapping extension
+
+ArchGuardAI now includes a software-only research-mapping module for structuring a coded corpus of neuro-symbolic AI studies and comparing it with user-supplied networking-standard concepts.
+
+Implemented capabilities:
+- structured study coding across neural component, symbolic component, knowledge representation, reasoning method, autonomy role, networking relevance, evaluation method and security relevance
+- taxonomy generation with per-category counts and corpus shares
+- study-by-taxonomy matrix generation for human review
+- descriptive sparse-coverage detection to highlight categories that are underrepresented in the supplied corpus
+- explicit tag-based mapping between coded studies and user-supplied networking-standard concepts
+- summary statistics for mapped and unmapped studies
+- synthetic study metadata and standards-mapping examples
+- automated tests
+
+Important limitation: this extension does not automatically conduct a Systematic Literature Review, verify citations, or establish genuine scientific research gaps. It operates on structured metadata supplied by the user; sparse categories are only descriptive gaps in that corpus.
+
+### Example use
+
+```python
+import pandas as pd
+from archguard.neurosymbolic_mapper import (
+    build_taxonomy,
+    identify_research_gaps,
+    map_standards,
+)
+
+studies = pd.read_csv("examples/neurosymbolic_studies.csv")
+standards = pd.read_csv("examples/networking_standards_map.csv")
+
+taxonomy = build_taxonomy(studies)
+gaps = identify_research_gaps(studies)
+mapping = map_standards(studies, standards)
+
+print(taxonomy)
+print(gaps)
+print(mapping)
+```
+
+### CV-safe extension description
+
+- Extended ArchGuardAI with a neuro-symbolic AI research-mapping module that transforms structured paper metadata into a taxonomy covering neural/symbolic roles, knowledge representation, reasoning, autonomy, networking relevance, evaluation and security.
+- Added descriptive gap analysis and explicit mapping from coded studies to user-supplied networking-standard concepts for human-reviewable literature systematization.
