@@ -1,0 +1,4 @@
+standard_id,concept,tags
+STD-1,Intent management,intent|policy
+STD-2,Autonomous closed-loop control,autonomy|closed-loop
+STD-3,Planning and policy execution,planning|policy
