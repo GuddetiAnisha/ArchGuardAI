@@ -1,0 +1,5 @@
+study_id,title,year,neural_component,symbolic_component,knowledge_representation,reasoning_method,autonomy_role,networking_relevance,evaluation_method,security_relevance,standards_tags
+S1,Neural-symbolic intent interpretation,2024,Transformer,Rules,Knowledge graph,Rule reasoning,Intent translation,Intent-based networking,Accuracy|Latency,Policy compliance,intent|policy
+S2,Constraint-aware autonomous control,2025,Neural policy,Constraints,State machine,Constraint checking,Closed-loop control,Autonomous networking,Simulation,Safety constraints,closed-loop|autonomy
+S3,Rule-guided intent assurance,2025,Transformer,Rules,Knowledge graph,Rule reasoning,Intent translation,Intent-based networking,Accuracy,Policy compliance,intent|policy
+S4,Symbolic planning with learned state estimation,2023,State estimator,Planner,Ontology,Symbolic planning,Planning,Autonomous networking,Simulation,Not specified,planning|autonomy
