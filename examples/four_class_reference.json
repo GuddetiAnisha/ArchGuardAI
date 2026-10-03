@@ -1,0 +1,15 @@
+{
+  "scenario_id": "four-class-validation-v1",
+  "labels": {
+    "SYN-AUTH-001": "COMPLIANT",
+    "SYN-AUTHZ-002": "NON_COMPLIANT",
+    "SYN-DATA-003": "COMPLIANT",
+    "SYN-DATA-004": "NON_COMPLIANT",
+    "SYN-SECRET-005": "NOT_ENOUGH_INFORMATION",
+    "SYN-LOG-006": "NOT_APPLICABLE",
+    "SYN-RES-007": "NOT_ENOUGH_INFORMATION",
+    "SYN-PRIV-008": "NOT_APPLICABLE"
+  },
+  "review_minutes": 18,
+  "notes": "Synthetic balanced benchmark with two examples for each ArchGuardAI decision class. Labels are intentionally authored to exercise deterministic evaluator behavior; they are not independent external expert validation."
+}
