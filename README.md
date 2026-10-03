@@ -16,14 +16,14 @@ ArchGuardAI evaluates architecture descriptions against a versioned requirement 
   - `COMPLIANT`: explicit evidence satisfies the criterion
   - `NON_COMPLIANT`: explicit evidence conflicts with the criterion
   - `NOT_ENOUGH_INFORMATION`: required evidence is absent and no contradiction is present
-  - `NOT_APPLICABLE`: the requirement is outside the declared scope
+  - `NOT_APPLICABLE`: the requirement is explicitly outside the declared scope
 - Includes requirement ID, quoted evidence, reasoning, risk, recommendation, confidence, and review flag
 - Evaluates precision, recall, false-positive rate, Cohen's kappa, agreement, explanation coverage, and estimated review effort
 - Exports JSON and CSV audit artifacts
 
 ## Why the evidence policy matters
 
-Missing documentation is recorded as `NOT_ENOUGH_INFORMATION`; it is not automatically treated as proof that the implementation violates a requirement. `NON_COMPLIANT` is reserved for explicit contradictions. This prevents the tool from silently converting documentary gaps into unsupported security claims.
+Missing documentation is recorded as `NOT_ENOUGH_INFORMATION`; it is not automatically treated as proof that the implementation violates a requirement. `NON_COMPLIANT` is reserved for explicit contradictions. `NOT_APPLICABLE` also requires explicit scope evidence and is not inferred merely because supporting evidence is missing. This prevents the tool from silently converting documentary gaps into unsupported security claims.
 
 ## Architecture
 
@@ -66,6 +66,75 @@ Evaluate against expert labels:
 python scripts/evaluate.py \
   --predictions reports/sample_assessment.json \
   --reference examples/expert_reference.json
+```
+
+## Validation results
+
+ArchGuardAI was validated locally on Windows with Python 3.12 using deterministic synthetic architecture scenarios and explicit reference labels.
+
+### Automated tests
+
+```text
+15 passed
+```
+
+The test suite covers catalogue loading, parsing, evaluator behavior, metrics, LLM guardrails, neuro-symbolic mapping, explicit contradictions, missing evidence handling, and explicit `NOT_APPLICABLE` handling.
+
+### Balanced four-class benchmark
+
+The balanced synthetic benchmark contains eight labelled requirements, with two examples for each decision class:
+
+| Class | Reference examples | Predicted examples |
+|---|---:|---:|
+| COMPLIANT | 2 | 2 |
+| NON_COMPLIANT | 2 | 2 |
+| NOT_ENOUGH_INFORMATION | 2 | 2 |
+| NOT_APPLICABLE | 2 | 2 |
+
+Evaluation results:
+
+| Metric | Result |
+|---|---:|
+| Requirements compared | 8 |
+| Agreement | **1.00** |
+| Cohen's kappa | **1.00** |
+| Macro precision | **1.00** |
+| Macro recall | **1.00** |
+| Macro F1 | **1.00** |
+| Non-compliance false-positive rate | **0.00** |
+
+Per-class precision, recall, and F1 were all **1.00** on this benchmark.
+
+The confusion matrix was perfectly diagonal:
+
+```text
+                         Predicted
+Actual                   C   NC  NEI NA
+COMPLIANT                2   0   0   0
+NON_COMPLIANT            0   2   0   0
+NOT_ENOUGH_INFORMATION   0   0   2   0
+NOT_APPLICABLE           0   0   0   2
+```
+
+The benchmark was rerun and produced the same class distribution and evaluation results, confirming deterministic behavior for this scenario.
+
+### Validation scope and limitation
+
+These results validate the implementation against a **small, deliberately constructed synthetic benchmark** designed to exercise all four decision classes. They demonstrate correct pipeline behavior, explicit-evidence handling, class separation, deterministic execution, and metric computation for the included scenarios. They do **not** establish production-level accuracy, generalization to arbitrary architecture documents, or performance against confidential Ericsson MAR content.
+
+For stronger research validation, use multiple independently authored architecture documents, additional requirement categories, multiple human reviewers, larger balanced test sets, and separate tuning/evaluation scenarios.
+
+### Reproduce the four-class benchmark
+
+```bash
+python scripts/assess.py \
+  --document examples/four_class_architecture.md \
+  --requirements requirements/synthetic_mars.yaml \
+  --output reports/four_class_assessment.json
+
+python scripts/evaluate.py \
+  --predictions reports/four_class_assessment.json \
+  --reference examples/four_class_reference.json
 ```
 
 ## Optional local LLM
