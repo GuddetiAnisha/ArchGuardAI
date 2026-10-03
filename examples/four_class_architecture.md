@@ -24,7 +24,7 @@ No security-relevant events are in scope for this component. The audit-logging r
 
 ## Resilience
 
-The document does not describe horizontal scaling, autoscaling, timeouts, bounded retries, circuit breakers, bulkheads, or an explicit contradiction to those controls. This is intentionally left as a documentary gap.
+The architecture description contains no design evidence for the resilience requirement and no explicit conflicting statement. This section is intentionally incomplete so that a reviewer should record a documentary gap rather than compliance or non-compliance.
 
 ## Privacy scope
 
