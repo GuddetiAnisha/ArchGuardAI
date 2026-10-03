@@ -21,6 +21,7 @@ class Requirement(BaseModel):
     recommendation: str
     evidence_any: list[str] = Field(default_factory=list)
     contradiction_any: list[str] = Field(default_factory=list)
+    not_applicable_any: list[str] = Field(default_factory=list)
 
 
 class Evidence(BaseModel):
