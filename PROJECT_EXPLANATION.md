@@ -6,7 +6,7 @@ ArchGuardAI is a Python application that helps a reviewer check whether a softwa
 
 The main purpose is to make architecture reviews more organized and traceable. Instead of simply stating that a system is secure or compliant, the application shows what evidence it found, what is missing, and what a human reviewer should check next.
 
-The repository uses **synthetic example requirements**, not confidential or official Ericsson Mandatory Architecture Requirements. This is a research prototype, not an authorized production compliance tool.
+The repository uses **synthetic example requirements**, 
 
 ## 2. Why this project is useful
 
