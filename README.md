@@ -1,6 +1,6 @@
 # ArchGuardAI
 
-AI-assisted software and security architecture verification prototype, aligned with Ericsson Master's Thesis Req. 791042.
+
 
 ArchGuardAI evaluates architecture descriptions against a versioned requirement catalogue, produces traceable findings, explains risks, recommends improvements, and compares system output with expert-reviewed reference assessments.
 
